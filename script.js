@@ -64,3 +64,38 @@ document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 });
+
+/* Theme toggle functionality */
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+
+// Check if user has a saved theme preference
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme) {
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  
+  if (currentTheme === 'dark') {
+    themeIcon.classList.remove('bx-moon');
+    themeIcon.classList.add('bx-sun');
+  }
+}
+
+// Toggle theme function
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  
+  if (currentTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+    themeIcon.classList.remove('bx-sun');
+    themeIcon.classList.add('bx-moon');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    themeIcon.classList.remove('bx-moon');
+    themeIcon.classList.add('bx-sun');
+  }
+}
+
+// Add event listener to theme toggle button
+themeToggle.addEventListener('click', toggleTheme);
